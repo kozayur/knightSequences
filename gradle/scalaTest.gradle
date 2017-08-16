@@ -1,0 +1,16 @@
+/**
+ * Run the ScalaTest Tests/Specs.
+ */
+dependencies {
+    testCompile 'org.pegdown:pegdown:1.4.2'
+}
+
+task scalaTest(dependsOn: ['testClasses'], type: JavaExec) {
+    main = 'org.scalatest.tools.Runner'
+    args = ['-R', 'build/classes/test',
+            '-o',
+            '-h', 'build/reports/scala',
+            '-u', 'build/test-results']
+    classpath = sourceSets.test.runtimeClasspath
+}
+tasks.getByPath('check').dependsOn('scalaTest')
